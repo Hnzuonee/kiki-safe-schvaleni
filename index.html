@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kristýnka — VIP stránka</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+
+  <main class="card">
+    <img src="foto.jpg" alt="Kristýnka — profilová fotka" class="pfp">
+
+    <h1 class="name">Exkluzivní přístup</h1>
+    <p class="cta">💎 Klikni a uvidíš vše navíc</p>
+
+    <!-- jediný button → volá POST -->
+    <button id="vipBtn" class="btn vip">❣️ Vstoupit do VIP</button>
+  </main>
+
+  <script>
+    document.getElementById('vipBtn').onclick = async () => {
+      try{
+        const r   = await fetch('/.netlify/functions/redirect', {method:'POST'});
+        const obj = await r.json();
+        location.href = obj.url;                   // přesměruj
+      }catch(e){
+        alert('Zkus to o chvilku později 🙏');
+      }
+    };
+  </script>
+
+</body>
+</html>
